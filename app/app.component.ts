@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
-
-import { Hero } from './hero';
 
 @Component({
     selector: 'my-app',
     template: `<h1>{{title}}</h1>
-               <my-heroes></my-heroes>
-               `
+               <nav>
+                  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+                  <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+               </nav>
+               <router-outlet></router-outlet>
+               `,
+    moduleId: module.id,
+    styleUrls: [ 'app.component.css' ]
 })
 
 
-export class AppComponent implements OnInit {
-
+export class AppComponent {
+    title = 'Tour of Heroes';
 }
