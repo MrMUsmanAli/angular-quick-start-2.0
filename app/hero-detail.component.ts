@@ -9,7 +9,7 @@ import { HeroService } from './hero.service';
 @Component({
     selector: 'my-hero-detail',
     moduleId: module.id,
-    templateUrl: 'hero-detail.component.html', 
+    templateUrl: 'hero-detail.component.html',
     styleUrls: [ 'hero-detail.component.css' ]
 })
 
@@ -26,7 +26,7 @@ export class HeroDetailComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
             this.heroService.getHero(id)
-            .then(hero => this.hero = hero);
+            .subscribe(hero => this.hero = hero);
         })
     }
 

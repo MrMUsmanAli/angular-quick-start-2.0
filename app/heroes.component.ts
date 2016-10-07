@@ -37,7 +37,7 @@ export class HeroesComponent implements OnInit {
     selectedHero : Hero;
     heroes: Hero[];
     getHeroes() : void {
-        this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+        this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
     }
     gotoDetail() : void {
         this.router.navigate(['/detail', this.selectedHero.id]);
