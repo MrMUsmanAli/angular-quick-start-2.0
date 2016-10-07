@@ -9,6 +9,10 @@ import { HeroService } from './hero.service'
     styleUrls: [ 'heroes.component.css' ],
     moduleId: module.id,
     template: `<h2>My heroes</h2>
+               <div>
+               <label>Hero name:</label><input #heroName />
+               <button (click)="add(heroName.value); heroName.value = '';">Add</button>
+               </div>
                <ul class="heroes">
                 <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
                    <span class="badge">{{hero.id}}</span> {{hero.name}}
@@ -37,9 +41,13 @@ export class HeroesComponent implements OnInit {
     selectedHero : Hero;
     heroes: Hero[];
     getHeroes() : void {
-        this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+        this.heroService.getList().subscribe(heroes => this.heroes = heroes);
     }
     gotoDetail() : void {
         this.router.navigate(['/detail', this.selectedHero.id]);
+    }
+    add(heroName: string) : void {
+        this.heroService.create(heroName)
+            .subscribe((hero) => this.heroes.push(hero));
     }
 }

@@ -16,18 +16,28 @@ export class HeroService {
 
     }
 
-    getHeroes(): Observable<Hero[]>{
+    getList(): Observable<Hero[]>{
         return this.http.get(this.heroesUrl).map(response => response.json().data as Hero[]);
     }
 
-    getHero(id: number): Observable<Hero>{
+    get(id: number): Observable<Hero>{
         return new Observable(observer => {
-            this.getHeroes()
+            this.getList()
                 .subscribe(heroes => {
                     let hero = heroes.find(hero => hero.id === id);
                     observer.next(hero);
                     observer.complete();
                 });
         });
+    }
+
+    update(hero: Hero) : void{
+        const url = `${this.heroesUrl}/${hero.id}`;
+        return this.http.put(url, JSON.stringify(hero), {headers: this.headers});
+    }
+
+    create(heroName: string) : Observable<Hero>{
+        return this.http.post(this.heroesUrl, JSON.stringify({name: heroName}), {headers: this.headers})
+            .map(response => response.json().data as Hero);
     }
 }

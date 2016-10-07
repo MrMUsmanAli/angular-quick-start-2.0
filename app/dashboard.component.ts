@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     }
     heroes: Hero[] = [];
     getHeroes(): void {
-        this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes.slice(1,5));
+        this.heroService.getList().subscribe(heroes => this.heroes = heroes.slice(1,5));
     }
     gotoDetail(hero: Hero) : void {
         let link = ['/detail', hero.id];
