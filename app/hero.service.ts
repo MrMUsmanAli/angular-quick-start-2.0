@@ -9,6 +9,7 @@ import { Hero } from './hero'
 @Injectable()
 export class HeroService {
     private heroesUrl = 'app/heroes';
+    private headers = new Headers({ 'Content-Type': 'application/json' });
 
     constructor(
         private http: Http
@@ -31,7 +32,7 @@ export class HeroService {
         });
     }
 
-    update(hero: Hero) : void{
+    update(hero: Hero) : Observable{
         const url = `${this.heroesUrl}/${hero.id}`;
         return this.http.put(url, JSON.stringify(hero), {headers: this.headers});
     }
