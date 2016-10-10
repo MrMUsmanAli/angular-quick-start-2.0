@@ -41,4 +41,9 @@ export class HeroService {
         return this.http.post(this.heroesUrl, JSON.stringify({name: heroName}), {headers: this.headers})
             .map(response => response.json().data as Hero);
     }
+
+    delete(id: Number): Observable{
+        const url = `${this.heroesUrl}/${id}`;
+        return this.http.delete(url, {headers: this.headers});
+    }
 }
